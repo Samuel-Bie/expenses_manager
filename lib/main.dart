@@ -66,7 +66,7 @@ class MyHomePage extends StatelessWidget {
                         border: Border.all(),
                       ),
                       child: Text(
-                        tx.amount.toString(),
+                        'MZN ${tx.amount}',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
