@@ -1,4 +1,4 @@
-import 'package:expenses_manager/transation.dart';
+import 'package:expenses_manager/widgets/user_transaction.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,21 +21,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-        id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: "New Book", amount: 152.02, date: DateTime.now()),
-    Transaction(
-        id: 't3', title: "New MBP", amount: 15.22, date: DateTime.now()),
-    Transaction(id: 't4', title: "Party", amount: 15.26, date: DateTime.now()),
-    Transaction(
-        id: 't5',
-        title: "Chill with friends",
-        amount: 95,
-        date: DateTime.now()),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,78 +37,7 @@ class MyHomePage extends StatelessWidget {
               child: Text('CHART'),
             ),
           ),
-          Card(
-            elevation: 5,
-            child: Container(
-              margin: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  TextField(
-                    decoration: InputDecoration(labelText: 'Title'),
-                  ),
-                  TextField(
-                    decoration: InputDecoration(labelText: 'Amount'),
-                  ),
-                  FlatButton(
-                    onPressed: (){},
-                    child: Text('Add'),
-                    textColor: Colors.purple,
-                  )
-                ],
-              ),
-            ),
-          ),
-          Column(
-            children: transactions.map((tx) {
-              return Card(
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
-                      child: Text(
-                        'MZN ${tx.amount}',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.purple,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          tx.title,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          tx.formatedDate,
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              );
-            }).toList(),
-          )
+          UserTransactions(),
         ],
       ),
     );
