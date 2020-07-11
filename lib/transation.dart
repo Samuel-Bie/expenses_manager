@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:intl/intl.dart';
 
 class Transaction {
   final String id;
@@ -12,4 +13,8 @@ class Transaction {
     @required this.amount,
     @required this.date,
   });
+
+  String get formatedDate {
+    return DateFormat.yMd().format(this.date);
+  }
 }
