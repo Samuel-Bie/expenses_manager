@@ -47,21 +47,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [
-    Transaction(
-        id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    Transaction(
-        id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    Transaction(
-        id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    Transaction(
-        id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    Transaction(
-        id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: "New Book", amount: 152.02, date: DateTime.now()),
-    Transaction(
-        id: 't3', title: "New MBP", amount: 15.22, date: DateTime.now()),
-    Transaction(id: 't4', title: "Party", amount: 15.26, date: DateTime.now()),
+    // Transaction(
+    //     id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
+    // Transaction(
+    //     id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
+    // Transaction(
+    //     id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
+    // Transaction(
+    //     id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
+    // Transaction(
+    //     id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
+    // Transaction(
+    //     id: 't2', title: "New Book", amount: 152.02, date: DateTime.now()),
+    // Transaction(
+    //     id: 't3', title: "New MBP", amount: 15.22, date: DateTime.now()),
+    // Transaction(id: 't4', title: "Party", amount: 15.26, date: DateTime.now()),
   ];
 
   void _startAddNewTransaction(BuildContext ctx) {

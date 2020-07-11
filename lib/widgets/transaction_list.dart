@@ -10,58 +10,91 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          Transaction tx = transactions[index];
-          return Card(
-            child: Row(
+      child: transactions.isEmpty
+          ? Column(
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Theme.of(context).primaryColorDark,
-                      width: 2,
-                    ),
-                  ),
-                  child: Text(
-                    'MZN ${tx.amount.toStringAsFixed(2)}',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColorDark,
-                    ),
-                  ),
+                Text(
+                  'No Transactions',
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
                 SizedBox(
-                  width: 10,
+                  height: 10,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      tx.title,
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
-                    Text(
-                      tx.formatedDate,
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey),
-                    ),
-                  ],
-                )
+                Container(
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ],
-            ),
-          );
-        },
-        itemCount: this.transactions.length,
-      ),
+            )
+          : _MainList(transactions: transactions),
+    );
+  }
+}
+
+class _MainList extends StatelessWidget {
+  const _MainList({
+    Key key,
+    @required this.transactions,
+  }) : super(key: key);
+
+  final List<Transaction> transactions;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) {
+        Transaction tx = transactions[index];
+        return Card(
+          child: Row(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 10,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context).primaryColorDark,
+                    width: 2,
+                  ),
+                ),
+                child: Text(
+                  'MZN ${tx.amount.toStringAsFixed(2)}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    tx.title,
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  Text(
+                    tx.formatedDate,
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey),
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      },
+      itemCount: this.transactions.length,
     );
   }
 }
