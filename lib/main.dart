@@ -43,12 +43,35 @@ class MyHomePage extends StatelessWidget {
         title: Text('Expenses manager'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
             width: double.infinity,
             child: Card(
               elevation: 5,
               child: Text('CHART'),
+            ),
+          ),
+          Card(
+            elevation: 5,
+            child: Container(
+              margin: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                  ),
+                  FlatButton(
+                    onPressed: (){},
+                    child: Text('Add'),
+                    textColor: Colors.purple,
+                  )
+                ],
+              ),
             ),
           ),
           Column(
@@ -90,10 +113,9 @@ class MyHomePage extends StatelessWidget {
                         Text(
                           tx.formatedDate,
                           style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey
-                          ),
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
                         ),
                       ],
                     )

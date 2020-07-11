@@ -15,6 +15,6 @@ class Transaction {
   });
 
   String get formatedDate {
-    return DateFormat.yMd().format(this.date);
+    return DateFormat.yMMMMEEEEd().format(this.date);
   }
 }
