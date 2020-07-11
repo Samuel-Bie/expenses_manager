@@ -21,9 +21,10 @@ class _NewTransactionState extends State<NewTransaction> {
     if (amount <= 0 || title.isEmpty) return;
 
     this.widget.addTransaction(
-      title,
-      amount,
-    );
+          title,
+          amount,
+        );
+    Navigator.pop(context);
   }
 
   @override
@@ -38,13 +39,13 @@ class _NewTransactionState extends State<NewTransaction> {
             TextField(
               controller: titleController,
               decoration: InputDecoration(labelText: 'Title'),
-              onSubmitted: (_) => submitData,
+              onSubmitted: (_) => this.submitData(),
             ),
             TextField(
               controller: amountController,
               decoration: InputDecoration(labelText: 'Amount'),
               keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => submitData,
+              onSubmitted: (_) => this.submitData(),
             ),
             FlatButton(
               onPressed: submitData,
