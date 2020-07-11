@@ -20,10 +20,7 @@ class _NewTransactionState extends State<NewTransaction> {
 
     if (amount <= 0 || title.isEmpty) return;
 
-    this.widget.addTransaction(
-          title,
-          amount,
-        );
+    this.widget.addTransaction(title, amount);
     Navigator.pop(context);
   }
 

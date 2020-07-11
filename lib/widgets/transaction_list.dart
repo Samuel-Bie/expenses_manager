@@ -23,14 +23,17 @@ class TransactionList extends StatelessWidget {
                     horizontal: 10,
                   ),
                   decoration: BoxDecoration(
-                    border: Border.all(),
+                    border: Border.all(
+                      color: Theme.of(context).primaryColorDark,
+                      width: 2,
+                    ),
                   ),
                   child: Text(
                     'MZN ${tx.amount.toStringAsFixed(2)}',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColorDark,
                     ),
                   ),
                 ),
