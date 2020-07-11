@@ -1,3 +1,4 @@
+import 'package:expenses_manager/widgets/chart.dart';
 import 'package:expenses_manager/widgets/new_transation.dart';
 import 'package:expenses_manager/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +20,12 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Quicksand',
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: ThemeData.light().textTheme.copyWith(
-          subtitle1: TextStyle(
-            fontFamily: 'OpenSans',
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+              subtitle1: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
@@ -47,22 +48,62 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [
-    // Transaction(
-    //     id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    // Transaction(
-    //     id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    // Transaction(
-    //     id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    // Transaction(
-    //     id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    // Transaction(
-    //     id: 't1', title: "New Shoes", amount: 15.55, date: DateTime.now()),
-    // Transaction(
-    //     id: 't2', title: "New Book", amount: 152.02, date: DateTime.now()),
-    // Transaction(
-    //     id: 't3', title: "New MBP", amount: 15.22, date: DateTime.now()),
-    // Transaction(id: 't4', title: "Party", amount: 15.26, date: DateTime.now()),
+    Transaction(
+      id: 't1',
+      title: "New Shoes",
+      amount: 15.55,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't1',
+      title: "New Shoes",
+      amount: 15.55,
+      date: DateTime.now().subtract(Duration(days: 1)),
+    ),
+    Transaction(
+      id: 't1',
+      title: "New Shoes",
+      amount: 15.55,
+      date: DateTime.now().subtract(Duration(days: 2)),
+    ),
+    Transaction(
+      id: 't1',
+      title: "New Shoes",
+      amount: 15.55,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
+    Transaction(
+      id: 't1',
+      title: "New Shoes",
+      amount: 15.55,
+      date: DateTime.now().subtract(Duration(days: 4)),
+    ),
+    Transaction(
+      id: 't2',
+      title: "New Book",
+      amount: 152.02,
+      date: DateTime.now().subtract(Duration(days: 5)),
+    ),
+    Transaction(
+      id: 't3',
+      title: "New MBP",
+      amount: 15.22,
+      date: DateTime.now().subtract(Duration(days: 6)),
+    ),
+    Transaction(
+      id: 't4',
+      title: "Party",
+      amount: 15.26,
+      date: DateTime.now().subtract(Duration(days: 7)),
+    ),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((element) {
+      var date = DateTime.now().subtract(Duration(days: 7));
+      return element.date.isAfter(date);
+    }).toList();
+  }
 
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
@@ -108,9 +149,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(
               width: double.infinity,
-              child: Card(
-                elevation: 5,
-                child: Text('CHART'),
+              child: Chart(
+                recentTransactions: _recentTransactions,
               ),
             ),
             TransactionList(_transactions),
