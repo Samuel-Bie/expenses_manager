@@ -17,11 +17,12 @@ class _NewTransactionState extends State<NewTransaction> {
   DateTime _selectedDate;
 
   void _submitData() {
+    if (_amountController.text.isEmpty) return;
     final title = _titleController.text;
     final amount = double.parse(_amountController.text);
     final date = _selectedDate;
 
-    if (amount <= 0 || title.isEmpty) return;
+    if (amount <= 0 || title.isEmpty || date == null) return;
 
     this.widget.addTransaction(title, amount, date);
     Navigator.pop(context);
