@@ -55,7 +55,7 @@ class _MainList extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         Transaction tx = transactions[index];
         return Card(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           elevation: 5,
           child: ListTile(
             leading: CircleAvatar(
@@ -80,10 +80,10 @@ class _MainList extends StatelessWidget {
                 ? FlatButton.icon(
                     textColor: Theme.of(context).errorColor,
                     onPressed: () => this.deleteTransaction(tx),
-                    icon: Icon(Icons.delete),
-                    label: Text('Delete'))
+                    icon: const Icon(Icons.delete),
+                    label: const Text('Delete'))
                 : IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     color: Theme.of(context).errorColor,
                     onPressed: () => this.deleteTransaction(tx),
                   ),
