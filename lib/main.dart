@@ -111,6 +111,29 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
+    return Scaffold(
+      appBar: appBar,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            if (isLandscape) ..._buildLandscape(mdQuery, appBar, _showChart),
+            if (!isLandscape) ..._buildPortrait(mdQuery, appBar),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Platform.isAndroid
+          ? FloatingActionButton(
+              onPressed: () => _startAddNewTransaction(context),
+              child: Icon(Icons.add),
+            )
+          : Container(),
+    );
+  }
+
+  List<Widget> _buildLandscape(
+      MediaQueryData mdQuery, AppBar appBar, bool _showChart) {
     final txList = Container(
       height: (mdQuery.size.height * 0.6 -
           appBar.preferredSize.height -
@@ -127,44 +150,24 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
 
-    return Scaffold(
-      appBar: appBar,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            if (isLandscape) _buildLandscape(),
-            if (isLandscape) _showChart ? chartLand : txList,
-            if (!isLandscape) ..._buildPortrait(mdQuery, appBar),
-          ],
-        ),
+    return [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text('Show chart'),
+          Switch.adaptive(
+            activeColor: Theme.of(context).accentColor,
+            value: _showChart,
+            onChanged: (value) {
+              setState(() {
+                _showChart = value;
+              });
+            },
+          ),
+        ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Platform.isAndroid
-          ? FloatingActionButton(
-              onPressed: () => _startAddNewTransaction(context),
-              child: Icon(Icons.add),
-            )
-          : Container(),
-    );
-  }
-
-  Widget _buildLandscape() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text('Show chart'),
-        Switch.adaptive(
-          activeColor: Theme.of(context).accentColor,
-          value: _showChart,
-          onChanged: (value) {
-            setState(() {
-              _showChart = value;
-            });
-          },
-        ),
-      ],
-    );
+      _showChart ? chartLand : txList,
+    ];
   }
 
   List<Widget> _buildPortrait(MediaQueryData mdQuery, AppBar appBar) {
