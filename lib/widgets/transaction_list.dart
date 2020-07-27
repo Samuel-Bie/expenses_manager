@@ -56,7 +56,9 @@ class _MainList extends StatelessWidget {
       children: <Widget>[
         ...transactions
             .map((e) => TransactionItem(
-                key: UniqueKey(), tx: e, deleteTransaction: deleteTransaction))
+                key: ValueKey(e.id),
+                tx: e,
+                deleteTransaction: deleteTransaction))
             .toList()
       ],
     );
