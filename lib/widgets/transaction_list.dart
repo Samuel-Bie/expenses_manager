@@ -48,49 +48,27 @@ class _MainList extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         Transaction tx = transactions[index];
         return Card(
-          child: Row(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 10,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).primaryColorDark,
-                    width: 2,
-                  ),
-                ),
-                child: Text(
-                  'MZN ${tx.amount.toStringAsFixed(2)}',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColorDark,
+          margin: EdgeInsets.all(5),
+          elevation: 5,
+          child: ListTile(
+            leading: CircleAvatar(
+              radius: 30,
+              child: FittedBox(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    'MT ${tx.amount.toStringAsFixed(2)}',
+                    style: TextStyle(),
                   ),
                 ),
               ),
-              SizedBox(
-                width: 10,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    tx.title,
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                  Text(
-                    tx.formatedDate,
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey),
-                  ),
-                ],
-              )
-            ],
+            ),
+            title: Text(
+              tx.title,
+            ),
+            subtitle: Text(
+              tx.formatedDate,
+            ),
           ),
         );
       },
