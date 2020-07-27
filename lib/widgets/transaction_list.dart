@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
-
-  TransactionList(this.transactions);
+  final Function deleteTransaction;
+  TransactionList(this.transactions, this.deleteTransaction);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 450,
       child: transactions.isEmpty
           ? Column(
               children: <Widget>[
@@ -29,18 +29,21 @@ class TransactionList extends StatelessWidget {
                 ),
               ],
             )
-          : _MainList(transactions: transactions),
+          : _MainList(
+              transactions: transactions,
+              deleteTransaction: this.deleteTransaction,
+            ),
     );
   }
 }
 
 class _MainList extends StatelessWidget {
-  const _MainList({
-    Key key,
-    @required this.transactions,
-  }) : super(key: key);
+  const _MainList(
+      {Key key, @required this.transactions, @required this.deleteTransaction})
+      : super(key: key);
 
   final List<Transaction> transactions;
+  final Function deleteTransaction;
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +71,11 @@ class _MainList extends StatelessWidget {
             ),
             subtitle: Text(
               tx.formatedDate,
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.delete),
+              color: Theme.of(context).errorColor,
+              onPressed: () => this.deleteTransaction(tx),
             ),
           ),
         );
