@@ -127,39 +127,15 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
 
-    final chartPort = Container(
-      height: (mdQuery.size.height * 0.4 -
-          appBar.preferredSize.height -
-          mdQuery.padding.top),
-      child: Chart(
-        recentTransactions: _recentTransactions,
-      ),
-    );
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text('Show chart'),
-                  Switch.adaptive(
-                    activeColor: Theme.of(context).accentColor,
-                    value: _showChart,
-                    onChanged: (value) {
-                      setState(() {
-                        _showChart = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
+            if (isLandscape) _buildLandscape(),
             if (isLandscape) _showChart ? chartLand : txList,
-            if (!isLandscape) chartPort,
-            if (!isLandscape) txList
+            if (!isLandscape) ..._buildPortrait(mdQuery, appBar),
           ],
         ),
       ),
@@ -171,5 +147,42 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           : Container(),
     );
+  }
+
+  Widget _buildLandscape() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text('Show chart'),
+        Switch.adaptive(
+          activeColor: Theme.of(context).accentColor,
+          value: _showChart,
+          onChanged: (value) {
+            setState(() {
+              _showChart = value;
+            });
+          },
+        ),
+      ],
+    );
+  }
+
+  List<Widget> _buildPortrait(MediaQueryData mdQuery, AppBar appBar) {
+    return [
+      Container(
+        height: (mdQuery.size.height * 0.4 -
+            appBar.preferredSize.height -
+            mdQuery.padding.top),
+        child: Chart(
+          recentTransactions: _recentTransactions,
+        ),
+      ),
+      Container(
+        height: (mdQuery.size.height * 0.6 -
+            appBar.preferredSize.height -
+            mdQuery.padding.top),
+        child: TransactionList(_transactions, _deleteTransaction),
+      )
+    ];
   }
 }
