@@ -15,7 +15,6 @@ class TransactionList extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     height: constraints.maxHeight * 0.2,
-
                     child: Text(
                       'No Transactions',
                       style: Theme.of(context).textTheme.subtitle1,
@@ -25,7 +24,7 @@ class TransactionList extends StatelessWidget {
                     height: constraints.maxHeight * 0.1,
                   ),
                   Container(
-                      height: constraints.maxHeight * 0.7,
+                    height: constraints.maxHeight * 0.7,
                     child: Image.asset(
                       'assets/images/waiting.png',
                       fit: BoxFit.cover,
@@ -77,11 +76,17 @@ class _MainList extends StatelessWidget {
             subtitle: Text(
               tx.formatedDate,
             ),
-            trailing: IconButton(
-              icon: Icon(Icons.delete),
-              color: Theme.of(context).errorColor,
-              onPressed: () => this.deleteTransaction(tx),
-            ),
+            trailing: MediaQuery.of(context).size.width > 460
+                ? FlatButton.icon(
+                    textColor: Theme.of(context).errorColor,
+                    onPressed: () => this.deleteTransaction(tx),
+                    icon: Icon(Icons.delete),
+                    label: Text('Delete'))
+                : IconButton(
+                    icon: Icon(Icons.delete),
+                    color: Theme.of(context).errorColor,
+                    onPressed: () => this.deleteTransaction(tx),
+                  ),
           ),
         );
       },
