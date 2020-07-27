@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
+              button: TextStyle(color: Colors.white),
             ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -96,7 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
     //   amount: 15.26,
     //   date: DateTime.now().subtract(Duration(days: 7)),
     // ),
-
   ];
 
   List<Transaction> get _recentTransactions {
