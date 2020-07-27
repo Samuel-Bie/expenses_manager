@@ -7,12 +7,20 @@ class NewTransaction extends StatefulWidget {
   NewTransaction(this.addTransaction);
 
   @override
-  _NewTransactionState createState() => _NewTransactionState();
+  _NewTransactionState createState() {
+    return _NewTransactionState();
+  }
 }
 
 class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+
+  @override
+  void initState() {
+    print('initState()');
+    super.initState();
+  }
 
   DateTime _selectedDate;
 

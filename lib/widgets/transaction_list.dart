@@ -52,12 +52,13 @@ class _MainList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int index) {
-        Transaction tx = transactions[index];
-        return TransactionItem(tx: tx, deleteTransaction: deleteTransaction);
-      },
-      itemCount: this.transactions.length,
+    return ListView(
+      children: <Widget>[
+        ...transactions
+            .map((e) => TransactionItem(
+                key: UniqueKey(), tx: e, deleteTransaction: deleteTransaction))
+            .toList()
+      ],
     );
   }
 }
